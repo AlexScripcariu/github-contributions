@@ -1,9 +1,143 @@
+:root {
+  /* cool background color: #353638 */
+  --high-g: #30e721;
+  --high-med-g: #2aca1d;
+  --low-med-g: #1e9015;
+  --low-g: #187311;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container-div {
-  
+html, body {
+  background-color: #232425;
+
+}
+
+.habit-container {
+  color: #f1f1f2;
+  margin: 1rem;
+  padding: 0.7em 0.6em;
+  width: min(40rem, 95%);
+}
+
+.habit-title {
+  font-weight: 600;
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+
+}
+
+.habit-goal {
+  color: #b8b8b9;
+  margin-bottom: 0.5rem;
+}
+
+
+/* working on the heatmap */
+.heatmap-store {
+  background-color: #353638;
+  border-radius: 0.3em;
+  color: #ffffff;
+  border: 1px solid #7b7f82;
+  padding: 0.5em;
+  padding-bottom: 0.1em;
+}
+
+
+.heatmap-container {
+  display: grid;
+  grid-template-rows: repeat(8,10px);
+  grid-template-columns: 1.8rem repeat(52, 10px);
+  grid-auto-columns: 10px;
+  grid-auto-rows: 10px;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  gap: 4px;
+  padding-bottom: 0.4em;
+}
+
+.cell {
+  border-radius: 0.1rem;
+}
+
+.unlogged {
+  background-color: #212223;
+}
+
+.full {
+  background-color: var(--high-g);
+}
+
+.three-q {
+  background-color: var(--high-med-g);
+}
+
+.half {
+  background-color: var(--low-med-g);
+}
+
+.one-q {
+  background-color: var(--low-g);
+}
+
+.day-1 {
+  /* grid-column-start: 3; */
+}
+
+.heatmap-date {
+  font-size: 0.7rem;
+  align-self: center;
+}
+
+.heatmap-date-mon {
+  grid-row-start: 1;
+}
+
+.heatmap-date-wed {
+  grid-row-start: 3;
+}
+
+
+.heatmap-date-fri {
+  grid-row-start: 5;
+}
+
+
+.heatmap-date-sun {
+  grid-row-start: 7;
+}
+
+
+
+
+.start-date-1 {
+  grid-row-start: 1;
+}
+
+.start-date-2 {
+  grid-row-start: 2;
+}
+
+.start-date-3 {
+  grid-row-start: 3;
+}
+
+.start-date-4 {
+  grid-row-start: 4;
+}
+
+.start-date-5 {
+  grid-row-start: 5;
+}
+
+.start-date-6 {
+  grid-row-start: 6;
+}
+
+.start-date-0 {
+  grid-row-start: 7;
 }
