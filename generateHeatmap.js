@@ -10,6 +10,14 @@ function createCell(counter, amountValue=0) {
   newCell.classList += `cell day-${counter}`;
 
   newCell.dataset.amount = amountValue;
+  console.log(counter);
+  if ([31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365].includes(counter)) {
+    console.log("Hello");
+    // newCell.id = "color-red";
+    newCell.style.backgroundColor = "red";
+  }
+
+
 
   return newCell;
 }
@@ -74,15 +82,25 @@ const docFrag = new DocumentFragment();
 
 let cellAttrValue = 1;
 
-for (let i = 0; i < 365; i++) {
-  cellAttrValue = randomInt(0, 4);
-  docFrag.appendChild(createCell(i + 1, cellAttrValue));
+// CALCULATE FOR LEAP YEAR?
 
+function generateAllCells(year) {
+  let quantity = year % 4 === 0 ? 366 : 365;
+
+  for (let i = 0; i < quantity; i++) {
+    cellAttrValue = randomInt(0, 4);
+    docFrag.appendChild(createCell(i + 1, cellAttrValue));
   
+    
+  }
 }
 
 
+
+
 let currentYear = new Date().getFullYear();
+
+generateAllCells(currentYear);
 
 calcStart(docFrag, findFirstDate(currentYear));
 
