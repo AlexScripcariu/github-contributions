@@ -12,7 +12,18 @@ function calculateTotalDays(year) {
 }
 
 function assignCellDate(parentContainer, year) {
+	let startDate = new Date();
+	startDate.setFullYear(year, 0, 1);
 
+	for (let i = 0; i < parentContainer.length; i++) {
+		let month = date.toLocaleString('default', { month: 'short' });
+
+		console.log(`${month}-${startDate.getDate()}`);
+
+		parentContainer[i].classList.add(`${month}-${startDate.getDate()}`);
+
+		startDate.setDate(startDate.getDate() + 1);
+	}
 }
 
 
@@ -30,6 +41,7 @@ function generateHeatMap() {
 	const heatmapCells = new DocumentFragment();
 
 	generateAllCells(heatmapCells, 2025);
+	assignCellDate(heatmapCells, 2025);
 
 
 	const heatMap = document.querySelector(".heatmap-container");
