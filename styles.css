@@ -1,0 +1,44 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+
+}
+
+.habit-container {
+	padding: 1rem;
+	margin: 0.5rem;
+}
+
+.habit-title {
+	font-size: clamp(2rem, 4vw, 2.5rem);
+	font-weight: 600;
+}
+
+/* Heatmap styles */
+
+.heatmap-container {
+	display: grid;
+	grid-template-columns: repeat(52, 10px);
+	grid-template-rows: 1.5rem repeat(7, 10px);
+	grid-auto-columns: 10px;
+	grid-auto-rows: 10px;
+	grid-auto-flow: column;
+
+}
+
+.heatmap-months {
+	display: grid;
+	grid-template-columns: repeat(53, 10px);
+	
+}
+
+.cell {
+	border-radius: 0.125em;
+	background-color: green;
+}
