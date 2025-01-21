@@ -7,14 +7,19 @@ function generateCell(parentContainer) {
 }
 
 function calculateTotalDays(year) {
-	return year % 4 === 0 ? 366 : 365;
+	return (year % 4 === 0) ? 366 : 365;
 
 }
 
-function generateAllCells(parentContainer, year) {
-	let totalLeapYears = calculateTotalDays(year);
+function assignCellDate(parentContainer, year) {
 
-	for (let i = 0; i < calculateTotalDays; i++) {
+}
+
+
+function generateAllCells(parentContainer, year) {
+	let totalDays = calculateTotalDays(year);
+
+	for (let i = 0; i < totalDays; i++) {
 		generateCell(parentContainer);
 	}
 }
@@ -22,9 +27,15 @@ function generateAllCells(parentContainer, year) {
 
 
 function generateHeatMap() {
-	const documentFragment = new DocumentFragment();
+	const heatmapCells = new DocumentFragment();
 
-	
-	const heatMap = document.querySelector(".heatmap-conatiner");
-	heatMap.appendChild(documentFragment);
+	generateAllCells(heatmapCells, 2025);
+
+
+	const heatMap = document.querySelector(".heatmap-container");
+	console.log(heatMap);
+	console.log(heatmapCells);
+	heatMap.appendChild(heatmapCells);
 }
+
+generateHeatMap();
