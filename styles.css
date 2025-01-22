@@ -84,3 +84,20 @@ html, body {
 .stage-4 {
   background-color: #155913;
 }
+
+/* Button styling */
+.log-button {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #303030;
+  border-radius: 0.35rem;
+  background-color: #fcfcfc;
+  font-weight: 500;
+  transition: background-color 0.2s ease-out;
+}
+
+.log-button:hover, .log-button:active {
+  background-color: #e8e8e8;
+  transition: background-color 0.2s ease-in;
+}
+/* Add so the gradient rotates as you are hovering over it NEED JS */

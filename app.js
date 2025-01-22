@@ -146,5 +146,3 @@ function generateHeatMap(habitName) {
 }
 
 generateHeatMap("reading");
-generateHeatMap("exercise");
-generateHeatMap("programming");
