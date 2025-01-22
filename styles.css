@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+/* Each habit box */
+
+.habit-container {
+  padding: 1rem;
+  margin: 0.5rem;
+  width: clamp(15rem, 95vw, 44rem);
+}
+
+.habit-name {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+.heatmap-container {
+  padding: 0.7rem;
+  border: 1px solid #cfcfcf;
+  border-radius: 0.3em;
+  margin-top: 0.6rem;
+  padding-bottom: 0;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(52, 10px);
+  grid-template-rows: 1.5rem repeat(7, 10px);
+  grid-auto-rows: 10px;
+  grid-auto-columns: 10px;
+  grid-auto-flow: column;
+  gap: 2px;
+  overflow-x: auto;
+  padding-bottom: 0.6rem;
+}
+
+.heatmap-months {
+  grid-column: 1 / span 53;
+  display: grid;
+  grid-template-columns: repeat(52, 10px);
+  gap: 2px;
+}
+
+
+.cell {
+  border-radius: 0.125em;
+}
+
+.unlogged {
+  background-color: #5a5b5a;
+}
+
+.stage-1 {
+  background-color: #38ee33;
+}
+
+.stage-2 {
+  background-color: #2ab326;
+}
+
+.stage-3 {
+  background-color: #239520;
+}
+
+.stage-4 {
+  background-color: #155913;
+}
