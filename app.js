@@ -1,7 +1,6 @@
 // creates each individual cell
 function createCell(parentContainer) {
   let newCell = document.createElement("div");
-  newCell.style.backgroundColor = "red";
 
   newCell.classList.add("cell");
 
@@ -99,7 +98,6 @@ function alignMonthText(parentContainer, monthContainer) {
 
   for (let i = 0; i < 12; i++) {
     const selectedElement = parentContainer.querySelector(`.${startDays[i]}`);
-    selectedElement.style.backgroundColor = "green";
 
     const gridRect = parentContainer.getBoundingClientRect();
     const elementRect = selectedElement.getBoundingClientRect();
@@ -121,13 +119,43 @@ function alignMonthText(parentContainer, monthContainer) {
 function applyColour(parentContainer) {
   const cells = parentContainer.children;
 
-  for (let i = 0; i < cells.length; i++) {
-    console.log(typeof cells[i].dataset.amount);
-    if (cells[i].dataset.amount === "0") {
-      
-      cells[i].classList.add("unlogged");
-      
+  let totalCellValues = 0;
+
+  for (let cell of cells) {
+    totalCellValues += Number(cell.dataset.amount);
+  }
+
+  const cellAmountMean = totalCellValues / cells.length;
+
+  for (let cell of cells) {
+    let cellAmount = cell.dataset.amount;
+    if (cellAmount === "0") {
+      cell.classList.add("unlogged"); 
+    } else if (cellAmount >= cellAmountMean * 1.8) {
+      cell.classList.add("stage-1");
+    } else if (cellAmount >= cellAmountMean * 1.3) {
+      cell.classList.add("stage-2");
+    } else if (cellAmount >= cellAmountMean * 0.7) {
+      cell.classList.add("stage-3");
+    } else {
+      cell.classList.add("stage-4");
     }
+
+  }
+}
+
+// DEBUG FUNCTION: helps generate random numbers.
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+
+// DEBUG FUNCTION: generates random cell values to create a 'standard' heatmap
+function assignRandomAmount(parentContainer) {
+  const cells = parentContainer.children;
+
+  for (let cell of cells) {
+    cell.dataset.amount = randomIntFromInterval(0, 4);
   }
 }
 
@@ -142,6 +170,7 @@ function generateHeatMap() {
 
   let dateOffset = generateCells(cellContainer, currentYear); // change to: no return
   assignDateClass(cellContainer.children, currentYear);
+  assignRandomAmount(cellContainer);
   applyColour(cellContainer);
 
   const heatmapGrid = document.querySelector(".heatmap-grid");
