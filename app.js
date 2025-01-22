@@ -1,9 +1,12 @@
 // creates each individual cell
-function createCell(parentContainer, isLogBool) {
+function createCell(parentContainer) {
   let newCell = document.createElement("div");
   newCell.style.backgroundColor = "red";
 
   newCell.classList.add("cell");
+
+  newCell.setAttribute("data-amount", "0");
+
 
   parentContainer.appendChild(newCell);
   // add code for boolean logs. i.e if one give max colour, otherwise have ranges
@@ -118,7 +121,14 @@ function alignMonthText(parentContainer, monthContainer) {
 function applyColour(parentContainer) {
   const cells = parentContainer.children;
 
-  console.log(cells);
+  for (let i = 0; i < cells.length; i++) {
+    console.log(typeof cells[i].dataset.amount);
+    if (cells[i].dataset.amount === "0") {
+      
+      cells[i].classList.add("unlogged");
+      
+    }
+  }
 }
 
 
@@ -132,7 +142,7 @@ function generateHeatMap() {
 
   let dateOffset = generateCells(cellContainer, currentYear); // change to: no return
   assignDateClass(cellContainer.children, currentYear);
-  
+  applyColour(cellContainer);
 
   const heatmapGrid = document.querySelector(".heatmap-grid");
   const heatmapMonths = document.querySelector(".heatmap-months");
