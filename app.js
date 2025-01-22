@@ -8,8 +8,6 @@ function createCell(parentContainer) {
 
 
   parentContainer.appendChild(newCell);
-  // add code for boolean logs. i.e if one give max colour, otherwise have ranges
-  // with the mean!
 }
 
 // HELPER FUNCTION: checks if the year is a leap year or not
@@ -22,16 +20,6 @@ function generateFirstDate(year) {
   let firstDay = new Date();
   firstDay.setFullYear(year, 0, 1);
   return firstDay
-}
-
-
-// HELPER FUNCTION: calculates which day the year starts in to offset the grid
-function calculateStartOffset(year) {
-  let firstDay = generateFirstDate(year);
-
-  firstDay = firstDay.getDay()
-
-  return firstDay;
 }
 
 // gives each element a date class e.g. 'feb-1'
@@ -59,47 +47,24 @@ function generateCells(parentContainer, year) {
   }
 
   const firstCell = parentContainer.firstElementChild;
-  const startOffset = calculateStartOffset(year);
+  const startOffset = generateFirstDate(year).getDay();
 
-  switch (startOffset) {
-    case 0:
-      firstCell.style.gridRowStart = 8;
-      return 7; // <- all returns are useful for calculating month text position
-    case 1:
-      firstCell.style.gridRowStart = 2;
-      return 1;
-    case 2:
-      firstCell.style.gridRowStart = 3;
-      return 2;
-    case 3:
-      firstCell.style.gridRowStart = 4;
-      return 3;
-    case 4:
-      firstCell.style.gridRowStart = 5;
-      return 4;
-    case 5:
-      firstCell.style.gridRowStart = 6;
-      return 5;
-    case 6:
-      firstCell.style.gridRowStart = 7;
-      return 6;
-  }
+  const rowStart = [8, 2, 3, 4, 5, 6, 7];
+
+  firstCell.style.gridRowStart = rowStart[startOffset];
 }
 
 function alignMonthText(parentContainer, monthContainer) {
-  // 1. find the position of each start date
-  // 2. apply formula to relative text: Math.ceil(cellIndex / 7);
   const startDays = [
     "jan-1", "feb-1", "mar-1", "apr-1", "may-1", "jun-1", 
     "jul-1", "aug-1", "sep-1", "oct-1", "nov-1", "dec-1"
   ];
 
   const monthElements = monthContainer.children;
+  const gridRect = parentContainer.getBoundingClientRect();
 
   for (let i = 0; i < 12; i++) {
-    const selectedElement = parentContainer.querySelector(`.${startDays[i]}`);
-
-    const gridRect = parentContainer.getBoundingClientRect();
+    const selectedElement = parentContainer.querySelector(`.${startDays[i]}`);    
     const elementRect = selectedElement.getBoundingClientRect();
 
     // Calculate the row and column based on positions
@@ -117,17 +82,17 @@ function alignMonthText(parentContainer, monthContainer) {
 }
 
 function applyColour(parentContainer) {
-  const cells = parentContainer.children;
-
   let totalCellValues = 0;
 
-  for (let cell of cells) {
-    totalCellValues += Number(cell.dataset.amount);
-  }
+  const cellValues = Array.from(parentContainer).map(cell => {
+    const amount = Number(cell.dataset.amount);
+    totalCellValues += amount;
+    return amount;
+  });
 
-  const cellAmountMean = totalCellValues / cells.length;
+  const cellAmountMean = totalCellValues / parentContainer.length;
 
-  for (let cell of cells) {
+  for (let cell of parentContainer) {
     let cellAmount = cell.dataset.amount;
     if (cellAmount === "0") {
       cell.classList.add("unlogged"); 
@@ -152,31 +117,34 @@ function randomIntFromInterval(min, max) { // min and max included
 
 // DEBUG FUNCTION: generates random cell values to create a 'standard' heatmap
 function assignRandomAmount(parentContainer) {
-  const cells = parentContainer.children;
-
-  for (let cell of cells) {
+  for (let cell of parentContainer) {
     cell.dataset.amount = randomIntFromInterval(0, 4);
   }
 }
 
 
 // main function that will generate the heatmap
-function generateHeatMap() {
+function generateHeatMap(habitName) {
   // creates a temporary document fragment to store all cells in
   const cellContainer = new DocumentFragment();
 
   // cell formatting functions
   const currentYear = new Date().getFullYear();
 
-  let dateOffset = generateCells(cellContainer, currentYear); // change to: no return
-  assignDateClass(cellContainer.children, currentYear);
-  assignRandomAmount(cellContainer);
-  applyColour(cellContainer);
+  generateCells(cellContainer, currentYear); // change to: no return
+  const cells = cellContainer.children;
 
-  const heatmapGrid = document.querySelector(".heatmap-grid");
-  const heatmapMonths = document.querySelector(".heatmap-months");
+  assignDateClass(cells, currentYear);
+  assignRandomAmount(cells);
+  applyColour(cells);
+
+  const heatmapGridQuery = `.${habitName} .heatmap-grid`;
+  const heatmapGrid = document.querySelector(heatmapGridQuery);
+  const heatmapMonths = document.querySelector(`${heatmapGridQuery} > .heatmap-months`);
   heatmapGrid.appendChild(cellContainer);
-  alignMonthText(heatmapGrid,  heatmapMonths);
+  alignMonthText(heatmapGrid, heatmapMonths);
 }
 
-generateHeatMap();
+generateHeatMap("reading");
+generateHeatMap("exercise");
+generateHeatMap("programming");
