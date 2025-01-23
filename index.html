@@ -6,6 +6,8 @@
     <title>Habit Tracker</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="app.js" defer></script>
+    <script src="scrollEffect.js" defer></script>
+    <script src="headerScript.js" defer></script>
   </head>
   <body>
     <header>
@@ -16,12 +18,13 @@
         <a>Update logs</a>
         <a>Support</a>
       </nav>
+      <img class="hamburger-icon" src="./assets/burger-menu.svg">
     </header>
     <main>
       <div class="habit-container">
-        <h2 class="habit-name">Reading</h2>
-        <p class="habit-desc">Read for 30 minutes a day.</p>
-        <div class="heatmap-container reading">
+        <h2 class="habit-name hidden">Reading</h2>
+        <p class="habit-desc hidden">Read for 30 minutes a day.</p>
+        <div class="heatmap-container reading hidden">
           <div class="heatmap-grid">
             <div class="heatmap-months">
               <p>Jan</p>
@@ -39,7 +42,7 @@
             </div>
           </div>
         </div>
-        <button class="log-button">Log habit</button>
+        <button class="log-button hidden">Log habit</button>
       </div>
     </main>
   </body>

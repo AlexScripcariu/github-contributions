@@ -7,9 +7,9 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;         
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -23,32 +23,68 @@ html, body {
 header {
   padding: 0.5rem 1.5rem;
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  align-items: center; 
+  justify-content: space-between;
 }
 
 nav {
   display: flex;
   gap: 0.8rem;
+  position: absolute;
+  right: 5rem;
 }
 
 nav a {
-  font-weight: 600;
-  color: #989898;
+  font-weight: 500;
+  color: #4b4b4b;
   transition: color 0.2s ease-out;
+  position: relative;
+  padding-bottom: 0.15rem;
+}
+
+nav a::before {
+  position: absolute;
+  content: '';
+  width: 0%;
+  height: 100%;
+  border-bottom: 2px solid #4389ec;
+  transition: width 0.4s ease-out;
 }
 
 nav a:hover {
+  color: #050505;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+
+
+/* nav a:hover {
   color: #333333;
   transition: color 0.2s ease-in;
-}
+} */
 
 .selected {
   color: black;
+  font-weight: 600;
 }
 
 #title {
   font-size: 1.8rem;
+}
+
+.hamburger-icon {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.35em;
+  outline: 1px solid transparent;
+  transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.hamburger-icon:hover {
+  transform: rotate(30deg);
 }
 
 
@@ -136,6 +172,28 @@ nav a:hover {
 
 .log-button:hover {
   background-color: #3b9dcf;
-  transition: background-color 0.2s var(--sine);
 }
 /* Add so the gradient rotates as you are hovering over it NEED JS */
+
+.hidden {
+  opacity: 0;
+  transform: translateY(4rem);
+  transition: all 1.5s ease;
+}
+
+.show {
+  transform: translateY(0rem);
+  opacity: 1;
+}
+
+.habit-desc {
+  transition-delay: 100ms;
+}
+
+.heatmap-container:nth-child(3) {
+  transition-delay: 200ms;
+}
+
+.log-button:nth-child(4) {
+  transition-delay: 250ms;
+}
