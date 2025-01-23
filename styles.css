@@ -34,6 +34,17 @@ nav {
 
 nav a {
   font-weight: 600;
+  color: #989898;
+  transition: color 0.2s ease-out;
+}
+
+nav a:hover {
+  color: #333333;
+  transition: color 0.2s ease-in;
+}
+
+.selected {
+  color: black;
 }
 
 #title {
