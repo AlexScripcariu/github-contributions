@@ -8,23 +8,29 @@
     <script src="app.js" defer></script>
     <script src="scrollEffect.js" defer></script>
     <script src="headerScript.js" defer></script>
+    <script src="heroMath.js" defer></script>
   </head>
   <body>
     <header>
-      <h1 id="title">Repit</h1>
+      
+      <h2 id="title">Repit</h2>
       <nav>
         <a class="selected">Home</a>
         <a>Your progress</a>
         <a>Update logs</a>
         <a>Support</a>
       </nav>
-      <img class="hamburger-icon" src="./assets/burger-menu.svg">
     </header>
     <main>
-      <div class="habit-container">
-        <h2 class="habit-name hidden">Reading</h2>
-        <p class="habit-desc hidden">Read for 30 minutes a day.</p>
-        <div class="heatmap-container reading hidden">
+      <section id="hero">
+        <div class="center-content">
+          <h1 class="noselect">Start <span class="text-highlight">tracking</span><br />now.</h1>
+        </div>
+      </section>
+      <div class="habit-container hidden">
+        <h2 class="habit-name ">Reading</h2>
+        <p class="habit-desc ">Read for 30 minutes a day.</p>
+        <div class="heatmap-container reading">
           <div class="heatmap-grid">
             <div class="heatmap-months">
               <p>Jan</p>
@@ -42,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button class="log-button hidden">Log habit</button>
+        <button class="log-button">Log habit</button>
       </div>
     </main>
   </body>
